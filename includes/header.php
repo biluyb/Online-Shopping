@@ -6,7 +6,18 @@
  * 
  * Shared header included on every public-facing page.
  * Contains the DOCTYPE, <head>, navigation bar, and
+<<<<<<< HEAD
  * loading overlay.
+=======
+ * loading overlay. Expects <?php
+    require_once __DIR__ . '/functions.php';
+    // Ensure session is started
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+?> to be loaded.
+>>>>>>> 1472dc0f1291c64f54cc402aaba1498a3f19ad18
  * =====================================================
  */
 
@@ -14,17 +25,33 @@
 if (!function_exists('is_logged_in')) {
     require_once __DIR__ . '/functions.php';
 }
+<<<<<<< HEAD
+=======
+<?php
+>>>>>>> 1472dc0f1291c64f54cc402aaba1498a3f19ad18
 // Ensure session is started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+<<<<<<< HEAD
+=======
+
+// Include language helper
+require_once __DIR__ . '/lang.php';
+
+>>>>>>> 1472dc0f1291c64f54cc402aaba1498a3f19ad18
 // Language selection handling
 if (isset($_GET['lang'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
 $lang = $_SESSION['lang'] ?? 'en';
+<<<<<<< HEAD
 require_once __DIR__ . '/lang.php';
 loadLanguage($lang);
+=======
+loadLanguage($lang);
+?>
+>>>>>>> 1472dc0f1291c64f54cc402aaba1498a3f19ad18
 
 // ── Fetch dynamic data for the navbar ─────────────────
 $cart_count = 0;

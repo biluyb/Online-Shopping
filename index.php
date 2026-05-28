@@ -61,6 +61,16 @@ if ($sale_stmt) {
                     </a>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="col-lg-6 d-none d-lg-block text-center position-relative">
+                <!-- Visual Floating Card Showcase -->
+                <div class="position-relative mx-auto" style="width: 450px; height: 450px;">
+                    <div class="card border-0 shadow-lg position-absolute" style="width: 280px; top: 0; left: 0; border-radius: 20px; transform: rotate(-8deg); z-index: 2; overflow: hidden; background: var(--bg-secondary);">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=60" alt="Showcase 1" class="img-fluid" style="height: 200px; object-fit: cover;">
+                        <div class="card-body p-3">
+                            <span class="text-muted small">Electronics</span>
+>>>>>>> 1472dc0f1291c64f54cc402aaba1498a3f19ad18
                             <h6 class="fw-bold mb-1">Wireless Headset Pro</h6>
                             <span class="fw-bold" style="color: var(--color-primary);">$149.99</span>
                         </div>
