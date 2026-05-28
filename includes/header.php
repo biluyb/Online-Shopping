@@ -1,4 +1,5 @@
 <?php
+ob_start();
 /* Header Template */
 
 // Ensure core functions are available
