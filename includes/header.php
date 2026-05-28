@@ -1,27 +1,11 @@
 <?php
-/**
- * =====================================================
- * Online shopping registration system - Header Template
- * =====================================================
- * 
- * Shared header included on every public-facing page.
- * Contains the DOCTYPE, <head>, navigation bar, and
- * loading overlay. Expects <?php
-    require_once __DIR__ . '/functions.php';
-    // Ensure session is started
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
-?> to be loaded.
- * =====================================================
- */
+/* Header Template */
 
 // Ensure core functions are available
 if (!function_exists('is_logged_in')) {
     require_once __DIR__ . '/functions.php';
 }
-<?php
+
 // Ensure session is started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -36,7 +20,7 @@ if (isset($_GET['lang'])) {
 }
 $lang = $_SESSION['lang'] ?? 'en';
 loadLanguage($lang);
-?>
+$site_name = get_setting($conn, 'site_name') ?? 'Online shopping registration system';
 
 // ── Fetch dynamic data for the navbar ─────────────────
 $cart_count = 0;
@@ -61,7 +45,7 @@ if ($cat_query) {
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="<?php echo htmlspecialchars($lang); ?>" data-bs-theme="light">
 <head>
     <!-- ── Meta Tags ─────────────────────────────────── -->
     <meta charset="UTF-8">
@@ -71,7 +55,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
     <meta name="author" content="Online shopping registration system">
     <meta name="csrf-token" content="<?php echo generate_csrf(); ?>">
 
-    <title><?php echo isset($page_title) ? htmlspecialchars($page_title) . ' | ' . htmlspecialchars($site_name) : htmlspecialchars($site_name); ?></title>
+    <title><?php echo isset($page_title) ? htmlspecialchars($page_title) . ' | ' . htmlspecialchars($site_name ?? 'Online shopping registration system') : htmlspecialchars($site_name ?? 'Online shopping registration system'); ?></title>
 
     <!-- ── Favicon ───────────────────────────────────── -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
@@ -89,6 +73,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 
     <!-- ── Custom Stylesheets ────────────────────────── -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -113,7 +98,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
         <!-- ── Logo ──────────────────────────────────── -->
         <a class="navbar-brand d-flex align-items-center" href="index.php">
             <i class="fas fa-shopping-bag brand-icon me-2"></i>
-            <span class="brand-text"><?php echo htmlspecialchars($site_name); ?></span>
+            <span class="brand-text"><?php echo htmlspecialchars($site_name ?? 'Online shopping registration system'); ?></span>
         </a>
 
         <!-- ── Mobile Toggle ─────────────────────────── -->
