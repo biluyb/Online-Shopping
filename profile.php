@@ -1,4 +1,27 @@
 <?php
+require_once 'includes/header.php';
+?>
+<style>
+/* Inline copy of profile.css for debugging */
+.profile-hero { border: 4px solid var(--color-primary); background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.15), rgba(var(--color-secondary-rgb), 0.15)); backdrop-filter: blur(12px); padding: 3rem 1rem; text-align: center; border-radius: 20px; margin-bottom: 2rem; }
+.profile-hero h1 { font-family: var(--font-heading); color: var(--color-primary); font-size: 2.2rem; margin: 0; }
+.avatar-preview { position: relative; width: 120px; height: 120px; margin: 0 auto 1.5rem; }
+.avatar-preview img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-primary); box-shadow: var(--shadow-md); transition: var(--transition-normal); }
+.avatar-preview::after { content: '\f044'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; bottom: 4px; right: 4px; background: var(--color-primary); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; opacity: 0; transition: var(--transition-fast); }
+.avatar-preview:hover img { transform: scale(1.05); }
+.avatar-preview:hover::after { opacity: 1; }
+.sv-form-card { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); border-radius: 20px; padding: 2.5rem; transition: var(--transition-normal); }
+.sv-form-card:hover { box-shadow: var(--shadow-md); }
+.form-control:focus, .form-select:focus { border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(var(--color-primary-rgb), 0.15); }
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.15); opacity: 0; transition: var(--transition-fast); }
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:active { transform: scale(0.97); }
+.badge-count { animation: bounce 0.4s ease; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (max-width: 768px) { .profile-hero { padding: 2rem 0.5rem; } .sv-form-card { padding: 1.5rem; } }
+</style>
+<?php
 /**
  * Online shopping registration system - User Profile Management Settings
  */
