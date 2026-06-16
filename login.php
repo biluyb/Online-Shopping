@@ -83,46 +83,91 @@ require_once 'includes/header.php';
 <!-- ══════════════════════════════════════════════════════
      Login Page Layout
      ══════════════════════════════════════════════════════ -->
-<div class="container py-5 d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px);">
-    <div class="w-100" style="max-width: 450px;">
-        
-        <!-- Alerts -->
+
+<!-- Background decoration -->
+<div style="position:fixed; inset:0; pointer-events:none; z-index:0;
+     background: radial-gradient(ellipse at 20% 50%, rgba(var(--color-primary-rgb),0.06) 0%, transparent 60%),
+                 radial-gradient(ellipse at 80% 20%, rgba(var(--color-secondary-rgb),0.05) 0%, transparent 60%);"></div>
+
+<div class="container py-5 d-flex align-items-center justify-content-center"
+     style="min-height: calc(100vh - 160px); position:relative; z-index:1;">
+    <div class="w-100" style="max-width: 440px;">
+
+        <!-- Flash Alerts -->
         <?php display_flash('login'); ?>
 
-        <div class="card border-0 shadow-sm p-4 p-md-5" style="border-radius:24px; background:var(--bg-secondary); border: 1px solid var(--border-color);">
+        <!-- Glass Card -->
+        <div class="glass-panel p-4 p-md-5">
+
+            <!-- Icon + Heading -->
             <div class="text-center mb-4">
-                <div class="mb-3 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50%; background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); font-size: 1.5rem;">
-                    <i class="fas fa-sign-in-alt"></i>
+                <div class="d-inline-flex align-items-center justify-content-center mb-3"
+                     style="width:64px; height:64px; border-radius:50%;
+                            background:rgba(var(--color-primary-rgb),0.12);
+                            color:var(--color-primary); font-size:1.6rem;">
+                    <i class="fas fa-shopping-bag"></i>
                 </div>
-                <h3 class="fw-bold mb-1">Welcome Back</h3>
-                <p class="text-secondary small">Log in to manage your orders and profile settings</p>
+                <h2 class="fw-bold mb-1" style="font-size:1.6rem;">Welcome Back</h2>
+                <p class="text-secondary small mb-0">Sign in to your account to continue</p>
             </div>
 
-            <form action="login.php" method="POST">
+            <form action="login.php" method="POST" id="loginForm">
                 <input type="hidden" name="csrf_token" value="<?php echo generate_csrf(); ?>">
-                
-                <div class="form-group mb-3">
-                    <label for="identity">Username or Email</label>
-                    <input type="text" class="form-control" id="identity" name="identity" required placeholder="john_doe or john@gmail.com" autocomplete="username">
+
+                <div class="mb-3">
+                    <label for="identity" class="form-label">Username or Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" class="form-control" id="identity" name="identity"
+                               required placeholder="john_doe or john@example.com"
+                               autocomplete="username">
+                    </div>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="password">Account Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required placeholder="••••••••" autocomplete="current-password">
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" id="password" name="password"
+                               required placeholder="••••••••"
+                               autocomplete="current-password">
+                        <button class="input-group-text" type="button" id="togglePassword"
+                                style="cursor:pointer; border-left:none;">
+                            <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 py-3 mb-3" style="border-radius:50px;">
-                    <i class="fas fa-sign-in-alt me-1"></i> Authenticate Account
+                <button type="submit" class="btn btn-primary w-100 py-3 mb-3"
+                        style="border-radius:var(--radius-full); font-size:1rem;">
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
                 </button>
             </form>
 
-            <div class="text-center mt-3">
-                <p class="text-secondary small mb-0">Don't have an account yet? 
-                    <a href="register.php" class="fw-bold text-decoration-none" style="color:var(--color-primary);">Register here</a>
+            <div class="text-center">
+                <p class="text-secondary small mb-0">
+                    Don't have an account?
+                    <a href="register.php" class="fw-bold" style="color:var(--color-primary);">Create one free</a>
                 </p>
             </div>
-        </div>
+        </div><!-- /.glass-panel -->
+
     </div>
 </div>
+
+<script>
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', function(){
+    const pwd  = document.getElementById('password');
+    const icon = document.getElementById('togglePasswordIcon');
+    if (pwd.type === 'password') {
+        pwd.type  = 'text';
+        icon.className = 'fas fa-eye-slash';
+    } else {
+        pwd.type  = 'password';
+        icon.className = 'fas fa-eye';
+    }
+});
+</script>
 
 <?php require_once 'includes/footer.php'; ?>

@@ -93,57 +93,132 @@ require_once 'includes/header.php';
 <!-- ══════════════════════════════════════════════════════
      Registration Page Layout
      ══════════════════════════════════════════════════════ -->
-<div class="container py-5 d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 200px);">
+
+<!-- Background decoration -->
+<div style="position:fixed; inset:0; pointer-events:none; z-index:0;
+     background: radial-gradient(ellipse at 80% 50%, rgba(var(--color-primary-rgb),0.06) 0%, transparent 55%),
+                 radial-gradient(ellipse at 20% 80%, rgba(var(--color-secondary-rgb),0.05) 0%, transparent 55%);"></div>
+
+<div class="container py-5 d-flex align-items-center justify-content-center"
+     style="min-height: calc(100vh - 160px); position:relative; z-index:1;">
     <div class="w-100" style="max-width: 500px;">
-        
+
         <!-- Alerts -->
         <?php display_flash('register'); ?>
 
-        <div class="card border-0 shadow-sm p-4 p-md-5" style="border-radius:24px; background:var(--bg-secondary); border: 1px solid var(--border-color);">
+        <!-- Glass Card -->
+        <div class="glass-panel p-4 p-md-5">
+
+            <!-- Heading -->
             <div class="text-center mb-4">
-                <div class="mb-3 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50%; background: rgba(var(--color-primary-rgb), 0.1); color: var(--color-primary); font-size: 1.5rem;">
+                <div class="d-inline-flex align-items-center justify-content-center mb-3"
+                     style="width:64px; height:64px; border-radius:50%;
+                            background:rgba(var(--color-primary-rgb),0.12);
+                            color:var(--color-primary); font-size:1.6rem;">
                     <i class="fas fa-user-plus"></i>
                 </div>
-                <h3 class="fw-bold mb-1"><?php echo t('create_account'); ?></h3>
-                <p class="text-secondary small"><?php echo t('register_subtitle'); ?></p>
+                <h2 class="fw-bold mb-1" style="font-size:1.6rem;"><?php echo t('create_account'); ?></h2>
+                <p class="text-secondary small mb-0"><?php echo t('register_subtitle'); ?></p>
             </div>
 
-            <form action="register.php" method="POST">
+            <form action="register.php" method="POST" id="registerForm">
                 <input type="hidden" name="csrf_token" value="<?php echo generate_csrf(); ?>">
-                
 
-                <div class="form-group mb-3">
-                    <label for="username"><?php echo t('username'); ?></label>
-                    <input type="text" class="form-control" id="username" name="username" required placeholder="<?php echo t('username_placeholder'); ?>" autocomplete="username">
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                        <input type="text" class="form-control" id="fullname" name="fullname"
+                               required placeholder="John Doe" autocomplete="name">
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="email"><?php echo t('email_address'); ?></label>
-                    <input type="email" class="form-control" id="email" name="email" required placeholder="<?php echo t('email_placeholder'); ?>" autocomplete="email">
+                <!-- Username -->
+                <div class="mb-3">
+                    <label for="username" class="form-label"><?php echo t('username'); ?></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-at"></i></span>
+                        <input type="text" class="form-control" id="username" name="username"
+                               required placeholder="<?php echo t('username_placeholder'); ?>"
+                               autocomplete="username" minlength="4">
+                    </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <label for="password"><?php echo t('password'); ?></label>
-                    <input type="password" class="form-control" id="password" name="password" required placeholder="<?php echo t('password_placeholder'); ?>" autocomplete="new-password">
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label"><?php echo t('email_address'); ?></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" id="email" name="email"
+                               required placeholder="<?php echo t('email_placeholder'); ?>"
+                               autocomplete="email">
+                    </div>
                 </div>
 
-                <div class="form-group mb-4">
-                    <label for="confirm_password"><?php echo t('confirm_password'); ?></label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="<?php echo t('confirm_password_placeholder'); ?>" autocomplete="new-password">
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label"><?php echo t('password'); ?></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control" id="password" name="password"
+                               required placeholder="Min. 8 characters"
+                               autocomplete="new-password" minlength="8">
+                        <button class="input-group-text" type="button" id="togglePass1"
+                                style="cursor:pointer; border-left:none;">
+                            <i class="fas fa-eye" id="togglePass1Icon"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 py-3 mb-3" style="border-radius:50px;">
-                    <i class="fas fa-user-plus me-1"></i> <?php echo t('register_button'); ?>
+                <!-- Confirm Password -->
+                <div class="mb-4">
+                    <label for="confirm_password" class="form-label"><?php echo t('confirm_password'); ?></label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-check-double"></i></span>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                               required placeholder="Re-enter your password"
+                               autocomplete="new-password">
+                        <button class="input-group-text" type="button" id="togglePass2"
+                                style="cursor:pointer; border-left:none;">
+                            <i class="fas fa-eye" id="togglePass2Icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-3 mb-3"
+                        style="border-radius:var(--radius-full); font-size:1rem;">
+                    <i class="fas fa-user-plus me-2"></i><?php echo t('register_button'); ?>
                 </button>
             </form>
 
-            <div class="text-center mt-3">
-                <p class="text-secondary small mb-0"><?php echo t('already_have_account'); ?>
-                    <a href="login.php" class="fw-bold text-decoration-none" style="color:var(--color-primary);"><?php echo t('login_here'); ?></a>
+            <div class="text-center">
+                <p class="text-secondary small mb-0">
+                    <?php echo t('already_have_account'); ?>
+                    <a href="login.php" class="fw-bold" style="color:var(--color-primary);"><?php echo t('login_here'); ?></a>
                 </p>
             </div>
-        </div>
+        </div><!-- /.glass-panel -->
     </div>
 </div>
 
+<script>
+function togglePasswordField(btnId, iconId, fieldId) {
+    document.getElementById(btnId).addEventListener('click', function(){
+        const field = document.getElementById(fieldId);
+        const icon  = document.getElementById(iconId);
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.className = 'fas fa-eye-slash';
+        } else {
+            field.type = 'password';
+            icon.className = 'fas fa-eye';
+        }
+    });
+}
+togglePasswordField('togglePass1', 'togglePass1Icon', 'password');
+togglePasswordField('togglePass2', 'togglePass2Icon', 'confirm_password');
+</script>
+
 <?php require_once 'includes/footer.php'; ?>
+

@@ -115,7 +115,7 @@ require_once 'includes/header.php';
 <!-- ══════════════════════════════════════════════════════
      Storefront Breadcrumbs and Header
      ══════════════════════════════════════════════════════ -->
-<div class="py-4 mb-4" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%); border-bottom: 1px solid var(--border-color);">
+<div class="page-hero mb-4">
     <div class="container">
         <h1 class="fw-bold mb-2">Shop Catalog</h1>
         <nav aria-label="breadcrumb">
@@ -134,7 +134,7 @@ require_once 'includes/header.php';
     <div class="row g-4">
         <!-- Sidebar Filters -->
         <aside class="col-lg-3">
-            <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius:18px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
+            <div class="filter-card mb-4">
                 <h5 class="fw-bold mb-4"><i class="fas fa-filter text-primary me-2"></i>Filters</h5>
                 
                 <form action="shop.php" method="GET">
