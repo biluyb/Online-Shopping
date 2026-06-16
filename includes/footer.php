@@ -143,24 +143,11 @@ $footer_current_page = basename($_SERVER['PHP_SELF'], '.php');
             <div class="row align-items-center">
 
                 <!-- Copyright -->
-                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                <div class="col-12 text-center">
                     <p class="mb-0">
                         &copy; <?php echo date('Y'); ?> <strong><?php echo htmlspecialchars($footer_site_name); ?></strong>.
                         All rights reserved.
                     </p>
-                </div>
-
-                <!-- Payment Method Icons -->
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="payment-methods">
-                        <span class="payment-label me-2">We Accept:</span>
-                        <i class="fab fa-cc-visa" title="Visa"></i>
-                        <i class="fab fa-cc-mastercard" title="Mastercard"></i>
-                        <i class="fab fa-cc-amex" title="American Express"></i>
-                        <i class="fab fa-cc-paypal" title="PayPal"></i>
-                        <i class="fab fa-cc-apple-pay" title="Apple Pay"></i>
-                        <i class="fab fa-cc-stripe" title="Stripe"></i>
-                    </div>
                 </div>
 
             </div>
