@@ -1,6 +1,21 @@
 <?php
-ob_start();
-/* Header Template */
+/**
+ * =====================================================
+ * Online shopping registration system - Header Template
+ * =====================================================
+ * 
+ * Shared header included on every public-facing page.
+ * Contains the DOCTYPE, <head>, navigation bar, and
+ * loading overlay. Expects <?php
+    require_once __DIR__ . '/functions.php';
+    // Ensure session is started
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+?> to be loaded.
+ * =====================================================
+ */
 
 // Ensure core functions are available
 if (!function_exists('is_logged_in')) {
@@ -21,7 +36,7 @@ if (isset($_GET['lang'])) {
 }
 $lang = $_SESSION['lang'] ?? 'en';
 loadLanguage($lang);
-$site_name = get_setting($conn, 'site_name') ?? 'Online shopping registration system';
+?>
 
 // ── Fetch dynamic data for the navbar ─────────────────
 $cart_count = 0;

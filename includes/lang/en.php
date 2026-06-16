@@ -18,6 +18,8 @@ return [
     'search_placeholder' => 'Search products...',
     'cart' => 'Cart',
     'notifications' => 'Notifications',
+    // Admin
     'admin_panel' => 'Admin Panel',
+    // Add more keys as needed
 ];
 ?>
